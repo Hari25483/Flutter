@@ -11,8 +11,10 @@ void main() {
         ),
         body: Center(
           child: Image(
-            image: NetworkImage('https://wallpaperaccess.com/full/6905324.jpg'),
-          ),
+              image: AssetImage("images/MIT-Metallic-Diamond-01-Press.jpeg")
+              // image: NetworkImage('https://wallpaperaccess.com/full/6905324.jpg'),
+
+              ),
         ),
       ),
     ),
