@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
                   letterSpacing: 2.5,
                   fontWeight: FontWeight.bold),
             ),
-            Card(
+            Container(
                 color: Colors.white,
                 padding: EdgeInsets.all(10.0),
                 margin:
