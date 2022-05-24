@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,6 +20,7 @@ void main() {
 class DicePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var dicenumber = 5;
     return Center(
       child: Row(
         children: <Widget>[
@@ -26,13 +29,13 @@ class DicePage extends StatelessWidget {
                   onPressed: () {
                     print("Left button got pressed");
                   },
-                  child: Image.asset('images/dice1.png'))),
+                  child: Image.asset('images/dice$dicenumber.png'))),
           Expanded(
               child: TextButton(
                   onPressed: () {
                     print("Right button got pressed");
                   },
-                  child: Image.asset('images/dice1.png')))
+                  child: Image.asset('images/dice$dicenumber .png')))
         ],
       ),
     );
