@@ -30,10 +30,12 @@ class _Magic_BallState extends State<Magic_Ball> {
     return Center(
       child: TextButton(
           onPressed: () {
-            ballnumber = Random().nextInt(6) + 1;
-            print(ballnumber);
+            setState(() {
+              ballnumber = Random().nextInt(5) + 1;
+              print(ballnumber);
+            });
           },
-          child: Image.asset("images/ball1.png")),
+          child: Image.asset("images/ball$ballnumber.png")),
     );
   }
 }
