@@ -26,7 +26,8 @@ class _Magic_BallState extends State<Magic_Ball> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Image.asset("images/ball1.png"),
+      child:
+          TextButton(onPressed: () {}, child: Image.asset("images/ball1.png")),
     );
   }
 }
