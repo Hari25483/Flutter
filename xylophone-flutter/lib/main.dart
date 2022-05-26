@@ -3,71 +3,82 @@ import 'package:audioplayers/audioplayers.dart';
 
 void main() => runApp(XylophoneApp());
 
+void playsound(int clipno) {
+  final player = AudioCache();
+  player.play('note$clipno.wav');
+}
+
 class XylophoneApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.black,
         body: SafeArea(
           child: Center(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                FlatButton(
-                    color: Colors.red,
+                Expanded(
+                  child: TextButton(
+                    style: TextButton.styleFrom(backgroundColor: Colors.red),
                     onPressed: () {
+                      playsound(1);
                       final player = AudioCache();
-
-                      player.play('note1.wav');
+                      player.play('note1 .wav');
                     },
-                    child: Text('Click me!')),
-                FlatButton(
-                    color: Colors.amber,
+                  ),
+                ),
+                Expanded(
+                  child: TextButton(
+                    style: TextButton.styleFrom(backgroundColor: Colors.amber),
                     onPressed: () {
-                      final player = AudioCache();
-
-                      player.play('note2.wav');
+                      playsound(2);
                     },
-                    child: Text('Click me!')),
-                FlatButton(
-                    color: Colors.blue,
+                  ),
+                ),
+                Expanded(
+                  child: TextButton(
+                    style: TextButton.styleFrom(backgroundColor: Colors.blue),
                     onPressed: () {
-                      final player = AudioCache();
-
-                      player.play('note3.wav');
+                      playsound(3);
                     },
-                    child: Text('Click me!')),
-                FlatButton(
-                    color: Colors.orangeAccent,
+                  ),
+                ),
+                Expanded(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                        backgroundColor: Colors.orangeAccent),
                     onPressed: () {
-                      final player = AudioCache();
-
-                      player.play('note4.wav');
+                      playsound(4);
                     },
-                    child: Text('Click me!')),
-                FlatButton(
-                    color: Colors.cyan,
+                  ),
+                ),
+                Expanded(
+                  child: TextButton(
+                    style: TextButton.styleFrom(backgroundColor: Colors.cyan),
                     onPressed: () {
-                      final player = AudioCache();
-
-                      player.play('note5.wav');
+                      playsound(5);
                     },
-                    child: Text('Click me!')),
-                FlatButton(
-                    color: Colors.deepPurpleAccent,
+                  ),
+                ),
+                Expanded(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                        backgroundColor: Colors.deepPurpleAccent),
                     onPressed: () {
-                      final player = AudioCache();
-
-                      player.play('note6.wav');
+                      playsound(6);
                     },
-                    child: Text('Click me!')),
-                FlatButton(
-                    color: Colors.green,
+                  ),
+                ),
+                Expanded(
+                  child: TextButton(
+                    style: TextButton.styleFrom(backgroundColor: Colors.green),
                     onPressed: () {
-                      final player = AudioCache();
-
-                      player.play('note7.wav');
+                      playsound(7);
                     },
-                    child: Text('Click me!')),
+                  ),
+                ),
               ],
             ),
           ),
