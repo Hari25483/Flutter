@@ -28,16 +28,21 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> Scorekeeper = [];
-  // List<String> Questions = [
-  //   'You can lead a cow down stairs but not up stairs.',
-  //   'Approximately one quarter of human bones are in the feet.',
-  //   'A slug\'s blood is green.'
-  // ];
-  // List<Question> questionbank = [
-  //   Question('You can lead a cow down stairs but not up stairs.', false),
-  //   Question('Approximately one quarter of human bones are in the feet.', true),
-  //   Question('A slug\'s blood is green.', true)
-  // ];
+
+  void checkAnswer(bool userPickedAnswer) {
+    bool correctanswer = quizBrain.getAnswer();
+
+    setState(() {
+      if (userPickedAnswer == correctanswer) {
+        print("Your answer is correct");
+        Scorekeeper.add(Icon(Icons.check, color: Colors.green));
+      } else {
+        print("Your answer is false");
+        Scorekeeper.add(Icon(Icons.close, color: Colors.red));
+      }
+      quizBrain.nextquestion();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,19 +80,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctanswer = quizBrain.getAnswer();
-
-                setState(() {
-                  if (correctanswer == true) {
-                    print("Your answer is correct");
-                    Scorekeeper.add(Icon(Icons.check, color: Colors.green));
-                  } else {
-                    print("Your answer is false");
-                    Scorekeeper.add(Icon(Icons.close, color: Colors.red));
-                  }
-                  quizBrain.nextquestion();
-                  //The user picked true.
-                });
+                checkAnswer(true);
               },
             ),
           ),
@@ -105,17 +98,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctanswer = quizBrain.getAnswer();
-                setState(() {
-                  if (correctanswer == false) {
-                    print("Your answer is correct");
-                    Scorekeeper.add(Icon(Icons.close, color: Colors.red));
-                  } else {
-                    print("Your answer is false");
-                    Scorekeeper.add(Icon(Icons.check, color: Colors.green));
-                  }
-                  quizBrain.nextquestion();
-                });
+                checkAnswer(false);
                 //The user picked false.
               },
             ),
