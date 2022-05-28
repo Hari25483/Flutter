@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quizzler/question.dart';
-import 'package:quizzler/question.dart';
+import 'package:quizzler/quizbrain.dart';
 
+QuizBrain quizBrain = new QuizBrain();
 void main() => runApp(Quizzler());
 
 class Quizzler extends StatelessWidget {
@@ -33,13 +33,12 @@ class _QuizPageState extends State<QuizPage> {
   //   'Approximately one quarter of human bones are in the feet.',
   //   'A slug\'s blood is green.'
   // ];
-  List<Question> questionbank = [
-    Question('You can lead a cow down stairs but not up stairs.', false),
-    Question('Approximately one quarter of human bones are in the feet.', true),
-    Question('A slug\'s blood is green.', true)
-  ];
+  // List<Question> questionbank = [
+  //   Question('You can lead a cow down stairs but not up stairs.', false),
+  //   Question('Approximately one quarter of human bones are in the feet.', true),
+  //   Question('A slug\'s blood is green.', true)
+  // ];
 
-  int question_no = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -52,7 +51,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questionbank[question_no].question,
+                quizBrain.getQuestion(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -76,7 +75,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctanswer = questionbank[question_no].answer;
+                bool correctanswer = quizBrain.getAnswer();
 
                 setState(() {
                   if (correctanswer == true) {
@@ -86,8 +85,7 @@ class _QuizPageState extends State<QuizPage> {
                     print("Your answer is false");
                     Scorekeeper.add(Icon(Icons.close, color: Colors.red));
                   }
-
-                  question_no++;
+                  quizBrain.nextquestion();
                   //The user picked true.
                 });
               },
@@ -107,7 +105,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctanswer = questionbank[question_no].answer;
+                bool correctanswer = quizBrain.getAnswer();
                 setState(() {
                   if (correctanswer == false) {
                     print("Your answer is correct");
@@ -116,8 +114,7 @@ class _QuizPageState extends State<QuizPage> {
                     print("Your answer is false");
                     Scorekeeper.add(Icon(Icons.check, color: Colors.green));
                   }
-
-                  question_no++;
+                  quizBrain.nextquestion();
                 });
                 //The user picked false.
               },
