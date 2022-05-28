@@ -48,7 +48,7 @@ class _QuizPageState extends State<QuizPage> {
         Alert(
           context: context,
           type: AlertType.success,
-          title: "Congratulations",
+          title: "Congratulations!",
           desc: "You have tried all the questions.",
           buttons: [
             DialogButton(
