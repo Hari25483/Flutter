@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizzler/quizbrain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 QuizBrain quizBrain = new QuizBrain();
 void main() => runApp(Quizzler());
@@ -41,6 +42,26 @@ class _QuizPageState extends State<QuizPage> {
         Scorekeeper.add(Icon(Icons.close, color: Colors.red));
       }
       quizBrain.nextquestion();
+      bool checkQuestionEnd = quizBrain.getQuestionCount();
+      if (checkQuestionEnd == true) {
+        Scorekeeper = [];
+        Alert(
+          context: context,
+          type: AlertType.success,
+          title: "RFLUTTER ALERT",
+          desc: "You have tried all the questions.",
+          buttons: [
+            DialogButton(
+              child: Text(
+                "Retry",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () => Navigator.pop(context),
+              width: 120,
+            )
+          ],
+        ).show();
+      }
     });
   }
 
@@ -81,6 +102,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 checkAnswer(true);
+                //The user picked true.
               },
             ),
           ),
