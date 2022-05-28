@@ -43,4 +43,13 @@ class QuizBrain {
       _question_no++;
     }
   }
+
+  bool getQuestionCount() {
+    if (_question_no == _questionbank.length - 1) {
+      _question_no = 0;
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
