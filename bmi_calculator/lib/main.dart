@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.dark().copyWith(
-        primaryColor: Color(0xFF0A0E21),
-        scaffoldBackgroundColor: Color(0xFF0A0E21),
+        primaryColor: const Color(0xFF0A0E21),
+        scaffoldBackgroundColor: const Color(0xFF0A0E21),
       ),
       home: const MyHomePage(),
     );
