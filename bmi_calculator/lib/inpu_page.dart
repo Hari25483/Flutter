@@ -21,22 +21,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Row(
               children: [
                 Expanded(
-                  child: Reusablewidget(),
+                  child: Reusablewidget(colour: Color(0xFF1D1E33)),
                 ),
-                Expanded(child: Reusablewidget())
+                Expanded(child: Reusablewidget(colour: Color(0xFF1D1E33)))
               ],
             )),
             Expanded(
-              child: Reusablewidget(),
+              child: Reusablewidget(colour: Color(0xFF1D1E33)),
             ),
             Expanded(
                 child: Row(
               children: [
                 Expanded(
-                  child: Reusablewidget(),
+                  child: Reusablewidget(colour: Color(0xFF1D1E33)),
                 ),
                 Expanded(
-                  child: Reusablewidget(),
+                  child: Reusablewidget(
+                    colour: Color(0xFF1D1E33),
+                  ),
                 )
               ],
             ))
@@ -46,17 +48,15 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class Reusablewidget extends StatelessWidget {
-  const Reusablewidget({
-    Key? key,
-  }) : super(key: key);
+  Reusablewidget({required this.colour});
+  Color colour;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-          color: const Color(0xFF1D1E33),
-          borderRadius: BorderRadius.circular(10)),
+      decoration:
+          BoxDecoration(color: colour, borderRadius: BorderRadius.circular(10)),
     );
   }
 }
