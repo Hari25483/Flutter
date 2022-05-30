@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+const bottomContainerHeight = 80.00;
+const reusableWidgetColor = Color(0xFF1D1E33);
+const bottomContainerColor = Color(0xFFEB1555);
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
@@ -21,27 +25,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Row(
               children: [
                 Expanded(
-                  child: Reusablewidget(colour: Color(0xFF1D1E33)),
+                  child: Reusablewidget(colour: reusableWidgetColor),
                 ),
-                Expanded(child: Reusablewidget(colour: Color(0xFF1D1E33)))
+                Expanded(child: Reusablewidget(colour: reusableWidgetColor))
               ],
             )),
             Expanded(
-              child: Reusablewidget(colour: Color(0xFF1D1E33)),
+              child: Reusablewidget(colour: reusableWidgetColor),
             ),
             Expanded(
                 child: Row(
               children: [
                 Expanded(
-                  child: Reusablewidget(colour: Color(0xFF1D1E33)),
+                  child: Reusablewidget(colour: reusableWidgetColor),
                 ),
                 Expanded(
                   child: Reusablewidget(
-                    colour: Color(0xFF1D1E33),
+                    colour: reusableWidgetColor,
                   ),
                 )
               ],
-            ))
+            )),
+            Container(
+              color: bottomContainerColor,
+              width: double.infinity,
+              height: bottomContainerHeight,
+            )
           ],
         ));
   }
