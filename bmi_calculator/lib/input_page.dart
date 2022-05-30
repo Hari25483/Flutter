@@ -28,12 +28,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 Expanded(
                   child: Reusablewidget(
                     colour: reusableWidgetColor,
-                    cardChild: IconWidget(),
+                    cardChild:
+                        IconWidget(icon: FontAwesomeIcons.mars, label: 'MALE'),
                   ),
                 ),
                 Expanded(
                     child: Reusablewidget(
-                        cardChild: Column(), colour: reusableWidgetColor))
+                        cardChild: IconWidget(
+                            icon: FontAwesomeIcons.venus, label: 'FEMALE'),
+                        colour: reusableWidgetColor))
               ],
             )),
             Expanded(
@@ -66,24 +69,24 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class IconWidget extends StatelessWidget {
-  const IconWidget({
-    Key? key,
-  }) : super(key: key);
+  IconWidget({required this.icon, required this.label});
+  final IconData icon;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const <Widget>[
+      children: <Widget>[
         Icon(
-          FontAwesomeIcons.mars,
+          icon,
           size: 80.0,
         ),
         SizedBox(
           height: 15.0,
         ),
         Text(
-          'MALE',
+          label,
           style: TextStyle(
             fontSize: 18.00,
             color: Color(0xFF8D8E98),
@@ -95,7 +98,7 @@ class IconWidget extends StatelessWidget {
 }
 
 class Reusablewidget extends StatelessWidget {
-  const Reusablewidget({required this.colour, required this.cardChild});
+  Reusablewidget({required this.colour, required this.cardChild});
   final Color colour;
   final Widget cardChild;
   @override
