@@ -12,15 +12,51 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: const Color(0xFF0A0E21),
           title: Text("BMI Calculator"),
         ),
-        body: Center(child: Text("Body Text")),
-        floatingActionButton: Theme(
-          data: ThemeData(accentColor: Colors.purple),
-          child: FloatingActionButton(
-            onPressed: () {},
-            child: const Icon(Icons.add),
-          ), // This trailing comma makes auto-formatting nicer for build methods.
+        body: Column(
+          children: [
+            Expanded(
+                child: Row(
+              children: [
+                Expanded(
+                  child: Reusablewidget(),
+                ),
+                Expanded(child: Reusablewidget())
+              ],
+            )),
+            Expanded(
+              child: Reusablewidget(),
+            ),
+            Expanded(
+                child: Row(
+              children: [
+                Expanded(
+                  child: Reusablewidget(),
+                ),
+                Expanded(
+                  child: Reusablewidget(),
+                )
+              ],
+            ))
+          ],
         ));
+  }
+}
+
+class Reusablewidget extends StatelessWidget {
+  const Reusablewidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+          color: const Color(0xFF1D1E33),
+          borderRadius: BorderRadius.circular(10)),
+    );
   }
 }
