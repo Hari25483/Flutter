@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'inpu_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,34 +17,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF0A0E21),
         scaffoldBackgroundColor: Color(0xFF0A0E21),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("BMI Calculator"),
-        ),
-        body: Center(child: Text("Body Text")),
-        floatingActionButton: Theme(
-          data: ThemeData(accentColor: Colors.purple),
-          child: FloatingActionButton(
-            onPressed: () {},
-            child: const Icon(Icons.add),
-          ), // This trailing comma makes auto-formatting nicer for build methods.
-        ));
   }
 }
