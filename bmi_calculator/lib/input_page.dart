@@ -4,7 +4,8 @@ import 'package:bmi_calculator/ReusableWidget.dart';
 import 'package:bmi_calculator/IconWidget.dart';
 
 const bottomContainerHeight = 80.00;
-const reusableWidgetColor = Color(0xFF1D1E33);
+const activeWidgetColor = Color(0xFF1D1E33);
+const inactiveWidgetColor = Color(0xFF111328);
 const bottomContainerColor = Color(0xFFEB1555);
 
 class MyHomePage extends StatefulWidget {
@@ -15,6 +16,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Color maleCardColor = inactiveWidgetColor;
+  Color femaleCardColor = inactiveWidgetColor;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,34 +32,39 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Row(
               children: [
                 Expanded(
-                  child: Reusablewidget(
-                    colour: reusableWidgetColor,
-                    cardChild:
-                        IconWidget(icon: FontAwesomeIcons.mars, label: 'MALE'),
+                  child: GestureDetector(
+                    onTap: () {
+                      print("Male card was pressed!");
+                    },
+                    child: Reusablewidget(
+                      colour: inactiveWidgetColor,
+                      cardChild: IconWidget(
+                          icon: FontAwesomeIcons.mars, label: 'MALE'),
+                    ),
                   ),
                 ),
                 Expanded(
                     child: Reusablewidget(
                         cardChild: IconWidget(
                             icon: FontAwesomeIcons.venus, label: 'FEMALE'),
-                        colour: reusableWidgetColor))
+                        colour: inactiveWidgetColor))
               ],
             )),
             Expanded(
               child: Reusablewidget(
-                  cardChild: Column(), colour: reusableWidgetColor),
+                  cardChild: Container(), colour: activeWidgetColor),
             ),
             Expanded(
                 child: Row(
               children: [
                 Expanded(
                   child: Reusablewidget(
-                      cardChild: Column(), colour: reusableWidgetColor),
+                      cardChild: Column(), colour: activeWidgetColor),
                 ),
                 Expanded(
                   child: Reusablewidget(
                     cardChild: Column(),
-                    colour: reusableWidgetColor,
+                    colour: activeWidgetColor,
                   ),
                 )
               ],
