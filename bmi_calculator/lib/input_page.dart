@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_calculator/ReusableWidget.dart';
 import 'package:bmi_calculator/IconWidget.dart';
+import 'constants.dart';
+
+int height = 180;
 
 enum Gender { male, female, nothing }
-
-const bottomContainerHeight = 80.00;
-const activeWidgetColor = Color(0xFF1D1E33);
-const inactiveWidgetColor = Color(0xFF111328);
-const bottomContainerColor = Color(0xFFEB1555);
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -18,8 +16,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Color maleCardColor = inactiveWidgetColor;
-  Color femaleCardColor = inactiveWidgetColor;
+  Color maleCardColor = kinactiveWidgetColor;
+  Color femaleCardColor = kinactiveWidgetColor;
   Gender selectedGender = Gender.nothing;
 
   @override
@@ -32,65 +30,99 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Column(
           children: [
             Expanded(
-                child: Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedGender = Gender.male;
+                          print("Male card was pressed!");
+                        });
+                      },
+                      child: Reusablewidget(
+                        colour: selectedGender == Gender.male
+                            ? kactiveWidgetColor
+                            : kinactiveWidgetColor,
+                        cardChild: IconWidget(
+                            icon: FontAwesomeIcons.mars, label: 'MALE'),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        selectedGender = Gender.male;
-                        print("Male card was pressed!");
+                        selectedGender = Gender.female;
+                        print("Female card was pressed!");
                       });
                     },
                     child: Reusablewidget(
-                      colour: selectedGender == Gender.male
-                          ? activeWidgetColor
-                          : inactiveWidgetColor,
-                      cardChild: IconWidget(
-                          icon: FontAwesomeIcons.mars, label: 'MALE'),
-                    ),
-                  ),
-                ),
-                Expanded(
-                    child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedGender = Gender.female;
-                      print("Female card was pressed!");
-                    });
-                  },
-                  child: Reusablewidget(
-                      cardChild: IconWidget(
-                          icon: FontAwesomeIcons.venus, label: 'FEMALE'),
-                      colour: selectedGender == Gender.female
-                          ? activeWidgetColor
-                          : inactiveWidgetColor),
-                ))
-              ],
-            )),
+                        cardChild: IconWidget(
+                            icon: FontAwesomeIcons.venus, label: 'FEMALE'),
+                        colour: selectedGender == Gender.female
+                            ? kactiveWidgetColor
+                            : kinactiveWidgetColor),
+                  ))
+                ],
+              ),
+            ),
             Expanded(
               child: Reusablewidget(
-                  cardChild: Container(), colour: activeWidgetColor),
+                cardChild: Column(
+                  // crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'HEIGHT',
+                      style: LabelTextStyle,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(height.toString(), style: knumberTextStyle),
+                        Text('cm', style: LabelTextStyle)
+                      ],
+                    ),
+                    Slider(
+                      value: height.toDouble(),
+                      inactiveColor: Color(0xFF8D8E98),
+                      activeColor: Color(0xFFEB1555),
+                      min: 120.0,
+                      max: 220.0,
+                      onChanged: (double newValue) {
+                        setState(() {
+                          height = newValue.round();
+                        });
+                        print(newValue);
+                      },
+                    )
+                  ],
+                ),
+                colour: kactiveWidgetColor,
+              ),
             ),
             Expanded(
                 child: Row(
               children: [
                 Expanded(
                   child: Reusablewidget(
-                      cardChild: Column(), colour: activeWidgetColor),
+                      cardChild: Column(), colour: kactiveWidgetColor),
                 ),
                 Expanded(
                   child: Reusablewidget(
                     cardChild: Column(),
-                    colour: activeWidgetColor,
+                    colour: kactiveWidgetColor,
                   ),
                 )
               ],
             )),
             Container(
-              color: bottomContainerColor,
+              color: kbottomContainerColor,
               width: double.infinity,
-              height: bottomContainerHeight,
+              height: kbottomContainerHeight,
             )
           ],
         ));
