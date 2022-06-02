@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_calculator/ReusableWidget.dart';
 import 'package:bmi_calculator/IconWidget.dart';
 import 'constants.dart';
+import 'package:bmi_calculator/results_page.dart';
 
 int height = 180;
 int weight = 60;
@@ -208,10 +209,18 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-          Container(
-            color: kbottomContainerColor,
-            width: double.infinity,
-            height: kbottomContainerHeight,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Results_page()));
+            },
+            child: Container(
+              child: Text('CALCULATE'),
+              color: kbottomContainerColor,
+              width: double.infinity,
+              margin: EdgeInsets.only(top: 10.0),
+              height: kbottomContainerHeight,
+            ),
           )
         ],
       ),
