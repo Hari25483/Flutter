@@ -5,6 +5,7 @@ import 'package:bmi_calculator/IconWidget.dart';
 import 'constants.dart';
 
 int height = 180;
+int weight = 60;
 
 enum Gender { male, female, nothing }
 
@@ -119,7 +120,29 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 Expanded(
                   child: Reusablewidget(
-                      cardChild: Column(), colour: kactiveWidgetColor),
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'WEIGHT',
+                            style: LabelTextStyle,
+                          ),
+                          Text(
+                            weight.toString(),
+                            style: knumberTextStyle,
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                RoundIconButton(
+                                  icon: FontAwesomeIcons.plus,
+                                ),
+                                SizedBox(width: 10.00),
+                                RoundIconButton(icon: FontAwesomeIcons.minus)
+                              ]),
+                        ],
+                      ),
+                      colour: kactiveWidgetColor),
                 ),
                 Expanded(
                   child: Reusablewidget(
@@ -136,5 +159,22 @@ class _MyHomePageState extends State<MyHomePage> {
             )
           ],
         ));
+  }
+}
+
+class RoundIconButton extends StatelessWidget {
+  RoundIconButton({required this.icon});
+
+  final IconData icon;
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      onPressed: () {},
+      child: Icon(icon),
+      elevation: 6.0,
+      fillColor: Color(0xFF4C4F5E),
+      shape: CircleBorder(),
+      constraints: BoxConstraints.tightFor(width: 56.00, height: 56.00),
+    );
   }
 }
