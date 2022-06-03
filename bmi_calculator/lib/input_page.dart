@@ -4,6 +4,7 @@ import 'package:bmi_calculator/ReusableWidget.dart';
 import 'package:bmi_calculator/IconWidget.dart';
 import 'constants.dart';
 import 'package:bmi_calculator/results_page.dart';
+import 'calculator_brain.dart';
 
 int height = 180;
 int weight = 60;
@@ -211,14 +212,30 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Results_page()));
+              calculator_brain calc =
+                  new calculator_brain(weight: weight, height: height);
+              String result = calc.calulateBMI();
+              String resultText = calc.getResult();
+              String interpretation = calc.getInterpretation();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Results_page(
+                            resultText: resultText,
+                            Result: result,
+                            interpretation: interpretation,
+                          )));
             },
             child: Container(
-              child: Text('CALCULATE'),
+              child: Center(
+                  child: Text(
+                'CALCULATE',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+              )),
               color: kbottomContainerColor,
               width: double.infinity,
               margin: EdgeInsets.only(top: 10.0),
+              padding: EdgeInsets.only(bottom: 20.00),
               height: kbottomContainerHeight,
             ),
           )
