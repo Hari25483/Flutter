@@ -27,7 +27,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   void getData() async {
     Response response = await get(Uri.parse(
-        "https://api.openweathermap.org/data/2.5/weather?q=London&appid=9a35db82a1d6216204de70f210a9fa27"));
+        "https://api.openweathermap.org/data/2.5/weather?q=London&appid=$apikey"));
     if (response.statusCode == 200) {
       String data = response.body;
       var decodedData = jsonDecode(data);
