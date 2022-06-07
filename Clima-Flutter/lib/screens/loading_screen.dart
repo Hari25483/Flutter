@@ -1,10 +1,9 @@
-import 'dart:convert';
-
+import 'package:clima/screens/location_screen.dart';
+import 'package:clima/services/networking.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:clima/services/location.dart';
-import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -12,50 +11,39 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  double latitude, longtitude;
   void initState() {
     super.initState();
     print("Init state called.");
-    getLocation();
   }
 
   void getLocation() async {
     Location location = new Location();
     await location.get_current_Location();
-    print(location.longtitude);
-    print(location.latitude);
-  }
+    longtitude = location.longtitude;
+    latitude = location.latitude;
 
-  void getData() async {
-    Response response = await get(Uri.parse(
-        "https://api.openweathermap.org/data/2.5/weather?q=London&appid=$apikey"));
-    if (response.statusCode == 200) {
-      String data = response.body;
-      var decodedData = jsonDecode(data);
-      var temperature = decodedData['main']['temp'];
-      var condition = decodedData['weather'][0]['id'];
-      var cityName = decodedData['name'];
+    NetworkHelper networkHelper = NetworkHelper(
+        "https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longtitude&appid=9a35db82a1d6216204de70f210a9fa27&units=metric");
 
-      print(temperature);
-      print(condition);
-      print(cityName);
+    var Weatherdata = await networkHelper.getData();
 
-      print(data);
-    } else {
-      print(response.statusCode);
-    }
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return LocationScreen(
+        locationWeather: Weatherdata,
+      );
+    }));
   }
 
   @override
   Widget build(BuildContext context) {
-    getData();
+    getLocation();
+
     return Scaffold(
       body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            // getLocation();
-            //Get the current location
-          },
-          child: Text('Get Location'),
+        child: SpinKitDoubleBounce(
+          color: Colors.white,
+          size: 100,
         ),
       ),
     );
