@@ -1,4 +1,9 @@
+import 'package:clima/services/networking.dart';
+import 'package:clima/services/location.dart';
+
 class WeatherModel {
+  String apiKey = "";
+  String openWeatherMapUrl = "https://api.openweathermap.org/data/2.5/weather";
   Future<dynamic> getLocationWeather() async {
     Location location = new Location();
     await location.get_current_Location();
