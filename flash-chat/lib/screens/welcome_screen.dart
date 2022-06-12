@@ -17,19 +17,23 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   void initState() {
     super.initState();
     controller =
-        AnimationController(vsync: this, duration: Duration(seconds: 1));
+        AnimationController(vsync: this, duration: Duration(seconds: 3));
 
-    animation = CurvedAnimation(parent: controller, curve: Curves.decelerate);
+    // animation = CurvedAnimation(parent: controller, curve: Curves.decelerate);
     controller.forward();
 
-    animation.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        controller.reverse(from: 1.0);
-      }
-      if (status == AnimationStatus.dismissed) {
-        controller.forward();
-      }
-    });
+    // animation.addStatusListener((status) {
+    //   if (status == AnimationStatus.completed) {
+    //     controller.reverse(from: 1.0);
+    //   }
+    //   if (status == AnimationStatus.dismissed) {
+    //     controller.forward();
+    //   }
+    // });
+
+    animation =
+        ColorTween(begin: Colors.teal, end: Colors.white).animate(controller);
+
     controller.addListener(() {
       setState(() {});
       print(controller.value);
@@ -44,7 +48,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal,
+      backgroundColor: animation.value,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
@@ -57,7 +61,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   tag: 'logo',
                   child: Container(
                     child: Image.asset('images/logo.png'),
-                    height: animation.value * 80,
+                    height: 60.00,
                   ),
                 ),
                 Text(
