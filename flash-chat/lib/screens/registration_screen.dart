@@ -1,15 +1,18 @@
 import 'package:flash_chat/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/components/RoundedButton.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static String id = 'Registration_Screen';
+  final _auth = FirebaseAuth.instance;
 
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  String email, password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +34,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 48.0,
             ),
             TextField(
+                style: TextStyle(color: Colors.black),
+                textAlign: TextAlign.center,
                 onChanged: (value) {
+                  email = value;
                   //Do something with the user input.
                 },
                 decoration:
@@ -40,8 +46,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 8.0,
             ),
             TextField(
+              style: TextStyle(color: Colors.black),
+              keyboardType: TextInputType.emailAddress,
+              textAlign: TextAlign.center,
+              obscureText: true,
               onChanged: (value) {
                 //Do something with the user input.
+                password = value;
               },
               decoration: kTextFieldDecoration.copyWith(
                   hintText: 'Enter your password'),
@@ -51,7 +62,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ),
             RoundButton(
                 color: Colors.lightBlueAccent,
-                onPressed: () {},
+                onPressed: () {
+                  print(email + "  " + password);
+                },
                 Title: 'Register'),
           ],
         ),
