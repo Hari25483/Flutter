@@ -5,9 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
+String uid_no;
+
 class LoginScreen extends StatefulWidget {
   static String id = 'Login_Screen';
-
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -79,6 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           email: email, password: password);
                       if (newUser != null) {
                         setState(() {
+                          uid_no = newUser.user.uid;
                           showSpinner = true;
                         });
                         Navigator.pushNamed(context, ChatScreen.id);
