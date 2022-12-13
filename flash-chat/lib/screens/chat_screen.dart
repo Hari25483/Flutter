@@ -1,3 +1,4 @@
+import 'package:flash_chat/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,7 +19,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final _auth = FirebaseAuth.instance;
   String message;
 
-  void initState() {
+  Future<void> initState() {
     super.initState();
     getCurrentUser();
     // getMessages();
@@ -29,7 +30,7 @@ class _ChatScreenState extends State<ChatScreen> {
       final user = await _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
-        print(user.email);
+        print(user.uid);
       }
     } catch (e) {
       print(e);
@@ -86,7 +87,13 @@ class _ChatScreenState extends State<ChatScreen> {
                       messageTextController.clear();
                       _firestore
                           .collection('messages')
-                          .add({'sender': loggedInUser.email, 'text': message});
+                          .doc(loggedInUser.uid)
+                          .collection('Plant')
+                          .add({
+                        'sender': loggedInUser.email,
+                        'text': message,
+                        'time': DateTime.now()
+                      });
                       //Implement send functionality.
                     },
                     child: Text(
@@ -108,7 +115,12 @@ class MessageStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: _firestore.collection('messages').snapshots(),
+        stream: _firestore
+            .collection('messages')
+            .doc(uid_no)
+            .collection('Plant')
+            .orderBy('time')
+            .snapshots(),
         // ignore: missing_return
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -118,12 +130,13 @@ class MessageStream extends StatelessWidget {
               ),
             );
           } else if (snapshot.hasData) {
-            final messages = snapshot.data.docs.reversed;
+            final messages = snapshot.data.docs;
             List<MessageBubble> messageBubbles = [];
             for (var message in messages) {
               final currentUser = loggedInUser.email;
               final messageText = message['text'];
               final messageSender = message['sender'];
+              // print(messageText);
               final messageBubble = MessageBubble(
                 sender: messageSender,
                 text: messageText,
@@ -131,9 +144,10 @@ class MessageStream extends StatelessWidget {
               );
               messageBubbles.add(messageBubble);
             }
+
             return Expanded(
                 child: ListView(
-                    reverse: true,
+                    reverse: false,
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                     children: messageBubbles));
           }
