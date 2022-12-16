@@ -3,9 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:flash_chat/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart';
 
 final _firestore = FirebaseFirestore.instance;
 User loggedInUser;
+int count = 0;
+void get_suggestion(
+    String text, String category, String uid_val, int count_val) async {
+  String url =
+      'http://5a71-35-245-9-87.ngrok.io/next_word?word=$text&uid=$uid_val&category=Plant&count=$count_val';
+  print(url);
+  Response response = await get(Uri.parse(url));
+  // '$url_base_path/next_word?word=$text,&uid=$uid_val&category=$category'
+  // Await the http get response, then decode the json-formatted response.
+  print(response.toString());
+  if (response.statusCode == 200) {
+    print("Success ");
+  } else {
+    print('Request failed with status: ${response.statusCode}.');
+  }
+}
 
 class ChatScreen extends StatefulWidget {
   static String id = 'Chat_Screen';
@@ -46,65 +63,57 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: null,
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () {
-                _auth.signOut();
-                Navigator.pop(context);
-                //Implement logout functionality
-              }),
-        ],
-        title: Text('⚡️Chat'),
-        backgroundColor: Colors.lightBlueAccent,
-      ),
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            MessageStream(),
-            Container(
-              decoration: kMessageContainerDecoration,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: TextField(
-                      controller: messageTextController,
-                      onChanged: (value) {
-                        message = value;
-                        //Do something with the user input.
+    return Container(
+      child: Scaffold(
+        body: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              MessageStream(),
+              Container(
+                decoration: kMessageContainerDecoration,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      child: TextField(
+                        controller: messageTextController,
+                        onChanged: (value) {
+                          message = value;
+                          //Do something with the user input.
+                        },
+                        decoration: kMessageTextFieldDecoration,
+                      ),
+                    ),
+                    MaterialButton(
+                      onPressed: () async {
+                        messageTextController.clear();
+                        _firestore
+                            .collection('messages')
+                            .doc(loggedInUser.uid)
+                            .collection('Planta')
+                            .add({
+                          'sender': loggedInUser.email,
+                          'text': message,
+                          'time': DateTime.now(),
+                          'count': count
+                        });
+                        count++;
+                        await get_suggestion(message, 'Plant', uid_no, count);
+                        count++;
+                        //Implement send functionality.
                       },
-                      decoration: kMessageTextFieldDecoration,
+                      child: Text(
+                        'Send',
+                        style: kSendButtonTextStyle,
+                      ),
                     ),
-                  ),
-                  MaterialButton(
-                    onPressed: () {
-                      messageTextController.clear();
-                      _firestore
-                          .collection('messages')
-                          .doc(loggedInUser.uid)
-                          .collection('Plant')
-                          .add({
-                        'sender': loggedInUser.email,
-                        'text': message,
-                        'time': DateTime.now()
-                      });
-                      //Implement send functionality.
-                    },
-                    child: Text(
-                      'Send',
-                      style: kSendButtonTextStyle,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -119,7 +128,7 @@ class MessageStream extends StatelessWidget {
             .collection('messages')
             .doc(uid_no)
             .collection('Plant')
-            .orderBy('time')
+            .orderBy('count')
             .snapshots(),
         // ignore: missing_return
         builder: (context, snapshot) {
@@ -130,7 +139,7 @@ class MessageStream extends StatelessWidget {
               ),
             );
           } else if (snapshot.hasData) {
-            final messages = snapshot.data.docs;
+            final messages = snapshot.data.docs.reversed;
             List<MessageBubble> messageBubbles = [];
             for (var message in messages) {
               final currentUser = loggedInUser.email;
@@ -147,7 +156,7 @@ class MessageStream extends StatelessWidget {
 
             return Expanded(
                 child: ListView(
-                    reverse: false,
+                    reverse: true,
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                     children: messageBubbles));
           }
