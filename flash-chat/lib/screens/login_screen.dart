@@ -1,3 +1,4 @@
+import 'package:flash_chat/screens/TabScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/constants.dart';
 import 'package:flash_chat/components/RoundedButton.dart';
@@ -83,7 +84,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           uid_no = newUser.user.uid;
                           showSpinner = true;
                         });
-                        Navigator.pushNamed(context, ChatScreen.id);
+                        // Navigator.pushNamed(context, ChatScreen.id);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => TabScreen()),
+                        );
                       }
                     } catch (e) {
                       print(e);
