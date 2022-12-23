@@ -1,17 +1,34 @@
+import 'dart:collection';
+
 import 'package:flash_chat/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 final _firestore = FirebaseFirestore.instance;
 User loggedInUser;
 int count = 0;
+final ref1 = FirebaseDatabase.instance.ref();
+final ref = FirebaseDatabase.instance.ref("$uid_no/English");
+
+Future<void> get_count() async {
+  final snapshot = await ref1.child("$uid_no/English/count").get();
+  if (snapshot.exists) {
+    var val = snapshot.value;
+    print(val);
+    count = val;
+  } else {
+    print('No data available.');
+  }
+}
+
 void get_suggestion(
     String text, String category, String uid_val, int count_val) async {
   String url =
-      'http://5a71-35-245-9-87.ngrok.io/next_word?word=$text&uid=$uid_val&category=Plant&count=$count_val';
+      'http://2216-34-133-184-168.ngrok.io/next_word?word=$text&uid=$uid_val&category=Plant&count=$count_val';
   print(url);
   Response response = await get(Uri.parse(url));
   // '$url_base_path/next_word?word=$text,&uid=$uid_val&category=$category'
@@ -39,6 +56,8 @@ class _ChatScreenState extends State<ChatScreen> {
   Future<void> initState() {
     super.initState();
     getCurrentUser();
+    get_count();
+
     // getMessages();
   }
 
@@ -92,7 +111,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         _firestore
                             .collection('messages')
                             .doc(loggedInUser.uid)
-                            .collection('Planta')
+                            .collection('Plant')
                             .add({
                           'sender': loggedInUser.email,
                           'text': message,
@@ -100,8 +119,12 @@ class _ChatScreenState extends State<ChatScreen> {
                           'count': count
                         });
                         count++;
+
                         await get_suggestion(message, 'Plant', uid_no, count);
                         count++;
+                        await ref.update({
+                          "count": count,
+                        });
                         //Implement send functionality.
                       },
                       child: Text(
