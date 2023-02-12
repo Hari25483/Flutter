@@ -85,15 +85,22 @@ class _LoginScreenState extends State<LoginScreen> {
                         setState(() {
                           uid_no = newUser.user.uid;
                           showSpinner = true;
+                          // Navigator.pushNamed(context, ChatScreen.id);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TabScreen()),
+                          );
+                          showSpinner = false;
                         });
-                        // Navigator.pushNamed(context, ChatScreen.id);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => TabScreen()),
-                        );
                       }
                     } catch (e) {
                       print(e);
+                      print("error da");
+                      setState(() {
+                        showSpinner = false;
+                      });
+                      return e;
                     }
                   },
                   Title: 'Log In'),

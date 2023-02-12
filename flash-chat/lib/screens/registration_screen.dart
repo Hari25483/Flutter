@@ -86,9 +86,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       });
                       if (newUser != null) {
                         Navigator.pushNamed(context, LoginScreen.id);
+                        setState(() {
+                          showSpinner = false;
+                        });
                       }
                     } catch (e) {
+                      setState(() {
+                        showSpinner = false;
+                      });
                       print(e);
+                      return e;
                     }
                   },
                   Title: 'Register'),
