@@ -35,7 +35,7 @@ Future<void> get_count() async {
 void get_suggestion(
     String text, String category, String uid_val, int count_val) async {
   String url =
-      'http://2216-34-133-184-168.ngrok.io/next_word?word=$text&uid=$uid_val&category=Plant&count=$count_val';
+      'http://a722-35-202-225-207.ngrok.io/next_word?word=$text&uid=$uid_val&category=Plant&count=$count_val';
   print(url);
   Response response = await get(Uri.parse(url));
   // '$url_base_path/next_word?word=$text,&uid=$uid_val&category=$category'

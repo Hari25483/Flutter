@@ -1,5 +1,6 @@
 import 'package:flash_chat/constants.dart';
 import 'package:flash_chat/screens/chat_screen.dart';
+import 'package:flash_chat/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/components/RoundedButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -47,8 +48,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     email = value;
                     //Do something with the user input.
                   },
-                  decoration:
-                      kTextFieldDecoration.copyWith(hintText: 'Enter a email')),
+                  decoration: kTextFieldDecoration.copyWith(
+                      hintText: 'Enter an email',
+                      hintStyle: TextStyle(color: Colors.blue))),
               SizedBox(
                 height: 8.0,
               ),
@@ -62,7 +64,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   password = value;
                 },
                 decoration: kTextFieldDecoration.copyWith(
-                    hintText: 'Enter your password'),
+                    hintText: 'Enter your password',
+                    hintStyle: TextStyle(color: Colors.blue)),
               ),
               SizedBox(
                 height: 24.0,
@@ -82,7 +85,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         showSpinner = true;
                       });
                       if (newUser != null) {
-                        Navigator.pushNamed(context, ChatScreen.id);
+                        Navigator.pushNamed(context, LoginScreen.id);
                       }
                     } catch (e) {
                       print(e);
