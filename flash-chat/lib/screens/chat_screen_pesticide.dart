@@ -8,10 +8,22 @@ import 'package:http/http.dart';
 final _firestore = FirebaseFirestore.instance;
 User loggedInUser;
 int count = 0;
+var link = "";
+var url = "";
+
+void getLink1() async {
+  final messages = await _firestore.collection('links').doc('Tamil').get();
+  print(messages.data());
+  link = messages.data()['url'];
+  print(link);
+  print(url);
+}
+
 void get_suggestion(
     String text, String category, String uid_val, int count_val) async {
-  String url =
-      'http://a722-35-202-225-207.ngrok.io/next_word?word=$text&uid=$uid_val&category=Plant&count=$count_val';
+  await getLink1();
+  url = '$link' +
+      'next_word?word=$text&uid=$uid_val&category=Planta&count=$count_val';
   print(url);
   Response response = await get(Uri.parse(url));
   // '$url_base_path/next_word?word=$text,&uid=$uid_val&category=$category'
@@ -127,7 +139,7 @@ class MessageStream extends StatelessWidget {
         stream: _firestore
             .collection('messages')
             .doc(uid_no)
-            .collection('Plant')
+            .collection('Planta')
             .orderBy('count')
             .snapshots(),
         // ignore: missing_return

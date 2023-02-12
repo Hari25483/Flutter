@@ -20,6 +20,16 @@ SpeechToText _speechToText = SpeechToText();
 bool _speechEnabled = false;
 String _lastWords = '';
 bool recorded_audio = false;
+var link = "";
+var url = "";
+
+void getLink() async {
+  final messages = await _firestore.collection('links').doc('English').get();
+  print(messages.data());
+  link = messages.data()['url'];
+  print(link);
+  print(url);
+}
 
 Future<void> get_count() async {
   final snapshot = await ref1.child("$uid_no/English/count").get();
@@ -34,8 +44,9 @@ Future<void> get_count() async {
 
 void get_suggestion(
     String text, String category, String uid_val, int count_val) async {
-  String url =
-      'http://a722-35-202-225-207.ngrok.io/next_word?word=$text&uid=$uid_val&category=Plant&count=$count_val';
+  await getLink();
+  url = '$link' +
+      'next_word?word=$text&uid=$uid_val&category=Plant&count=$count_val';
   print(url);
   Response response = await get(Uri.parse(url));
   // '$url_base_path/next_word?word=$text,&uid=$uid_val&category=$category'
