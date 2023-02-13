@@ -95,6 +95,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         showSpinner = false;
                       });
                       print(e);
+                      showErrorMessage(context, "Please Enter Correct Email");
                       return e;
                     }
                   },
