@@ -23,6 +23,7 @@ bool recorded_audio = false;
 var link = "";
 var url = "";
 
+//Get server URL
 void getLink() async {
   final messages = await _firestore.collection('links').doc('English').get();
   print(messages.data());
@@ -31,6 +32,7 @@ void getLink() async {
   print(url);
 }
 
+//Get count of messages to order them
 Future<void> get_count() async {
   final snapshot = await ref1.child("$uid_no/English/count").get();
   if (snapshot.exists) {
@@ -185,6 +187,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           message = message;
                         }
                         messageTextController.clear();
+                        //Store message in database
                         _firestore
                             .collection('messages')
                             .doc(loggedInUser.uid)
@@ -197,7 +200,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         });
                         recorded_audio = false;
                         count++;
-
+                        //Get server's reply
                         await get_suggestion(message, 'Plant', uid_no, count);
                         count++;
                         await ref.update({
