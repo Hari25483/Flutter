@@ -8,6 +8,50 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 String uid_no;
 
+void showErrorMessage(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      content: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.red[800], Colors.red[900]],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        padding: EdgeInsets.all(16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Text(
+                message,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.close,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                ScaffoldMessenger.of(context).removeCurrentSnackBar();
+              },
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
 class LoginScreen extends StatefulWidget {
   static String id = 'Login_Screen';
   @override
@@ -96,6 +140,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                     } catch (e) {
                       print(e);
+                      showErrorMessage(
+                          context, "Please enter correct credentials");
+                      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      //   content: Text("Please enter correct credentials"),
+                      //   behavior: SnackBarBehavior.floating,
+                      // ));
                       print("error da");
                       setState(() {
                         showSpinner = false;
