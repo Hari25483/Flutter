@@ -1,4 +1,5 @@
 import 'package:flash_chat/screens/chat_screen_pesticide.dart';
+import 'package:flash_chat/screens/welcome_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'chat_screen.dart';
@@ -18,18 +19,18 @@ class TabScreen extends StatelessWidget {
         appBar: AppBar(
           leading: null,
           actions: <Widget>[
-            // IconButton(
-            //     icon: Icon(Icons.close),
-            //     onPressed: () {
-            //       // _auth.signOut();
-            //       Navigator.pop(context);
-            //       //Implement logout functionality
-            //     }),
+            IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  // _auth.signOut();
+                  // Navigator.pop(context);
+                  //Implement logout functionality
+                }),
             IconButton(
                 icon: Icon(Icons.logout),
                 onPressed: () {
                   _signOut();
-                  Navigator.pop(context);
+                  Navigator.pushNamed(context, WelcomeScreen.id);
                   //Implement logout functionality
                 }),
           ],
