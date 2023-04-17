@@ -28,7 +28,7 @@ class AddTaskScreen extends StatelessWidget {
               autofocus: true,
               textAlign: TextAlign.center,
             ),
-            FlatButton(
+            MaterialButton(
                 color: Colors.lightBlueAccent,
                 onPressed: () {},
                 child: Text(
