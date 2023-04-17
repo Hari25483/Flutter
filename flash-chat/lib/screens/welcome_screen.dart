@@ -72,9 +72,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   ),
                 ),
                 TypewriterAnimatedTextKit(
-                  text: ['Crop Advisor'],
+                  text: ['Emotion Buddy'],
                   textStyle: TextStyle(
-                    fontSize: 40.0,
+                    fontSize: 35.0,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
