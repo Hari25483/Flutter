@@ -34,7 +34,7 @@ class TabScreen extends StatelessWidget {
                   //Implement logout functionality
                 }),
           ],
-          title: Text('⚡CropAdvisor'),
+          title: Text('⚡Emotion Buddy'),
           backgroundColor: Colors.lightBlueAccent,
           bottom: const TabBar(
             tabs: [
@@ -48,7 +48,7 @@ class TabScreen extends StatelessWidget {
           ),
         ),
         body: TabBarView(
-          children: [ChatScreen(), ChatScreen_Tamil()],
+          children: [ChatScreen()],
         ),
       ),
     );
