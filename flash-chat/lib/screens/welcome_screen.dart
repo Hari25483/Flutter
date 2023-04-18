@@ -62,19 +62,19 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Row(
+            Column(
               children: <Widget>[
                 Hero(
                   tag: 'logo',
                   child: Container(
-                    child: Image.asset('images/architecture studio.png'),
-                    height: 80.00,
+                    child: Image.asset('images/chat-bot-head-set-760.jpg'),
+                    height: 150.00,
                   ),
                 ),
                 TypewriterAnimatedTextKit(
                   text: ['Emotion Buddy'],
                   textStyle: TextStyle(
-                    fontSize: 35.0,
+                    fontSize: 40.0,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
