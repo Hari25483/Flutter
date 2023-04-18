@@ -37,7 +37,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   tag: 'logo',
                   child: Container(
                     height: 300.0,
-                    child: Image.asset('images/architecture studio.png'),
+                    child: Image.asset('images/chat-bot-head-set-760.jpg'),
                   ),
                 ),
               ),
