@@ -4,11 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'chat_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 Future<void> _signOut() async {
   await FirebaseAuth.instance.signOut();
   print("Signed out");
 }
+
+User user = FirebaseAuth.instance.currentUser;
 
 class TabScreen extends StatelessWidget {
   @override
@@ -19,13 +22,13 @@ class TabScreen extends StatelessWidget {
         appBar: AppBar(
           leading: null,
           actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.close),
-                onPressed: () {
-                  // _auth.signOut();
-                  // Navigator.pop(context);
-                  //Implement logout functionality
-                }),
+            // IconButton(
+            //     icon: Icon(Icons.close),
+            //     onPressed: () {
+            //       // _auth.signOut();
+            //       // Navigator.pop(context);
+            //       //Implement logout functionality
+            //     }),
             IconButton(
                 icon: Icon(Icons.logout),
                 onPressed: () {
@@ -39,11 +42,11 @@ class TabScreen extends StatelessWidget {
           bottom: const TabBar(
             tabs: [
               Tab(
-                text: 'English',
+                text: 'Hello There',
               ),
-              Tab(
-                text: 'Tamil',
-              ),
+              // Tab(
+              //   text: 'Tamil',
+              // ),
             ],
           ),
         ),
