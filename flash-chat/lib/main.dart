@@ -27,8 +27,8 @@ class _FlashChatState extends State<FlashChat> {
   User user;
   void initState() {
     super.initState();
-    user = FirebaseAuth.instance.currentUser;
-    print(user);
+    // user = FirebaseAuth.instance.currentUser;
+    // print(user.uid);
   }
 
   @override
