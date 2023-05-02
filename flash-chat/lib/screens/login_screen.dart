@@ -80,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   tag: 'logo',
                   child: Container(
                     height: 300.0,
-                    child: Image.asset('images/chat-bot-head-set-760.jpg'),
+                    child: Image.asset('images/Srilankan Logo.png'),
                   ),
                 ),
               ),
