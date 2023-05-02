@@ -67,12 +67,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 Hero(
                   tag: 'logo',
                   child: Container(
-                    child: Image.asset('images/chat-bot-head-set-760.jpg'),
-                    height: 150.00,
+                    child: Image.asset('images/Srilankan Logo.png'),
+                    height: 200.00,
                   ),
                 ),
                 TypewriterAnimatedTextKit(
-                  text: ['Emotion Buddy'],
+                  text: ['E-Vote Bot'],
                   textStyle: TextStyle(
                     fontSize: 40.0,
                     fontWeight: FontWeight.w900,
