@@ -42,16 +42,19 @@ class TabScreen extends StatelessWidget {
           bottom: const TabBar(
             tabs: [
               Tab(
-                text: 'Hello There',
+                text: 'English',
               ),
-              // Tab(
-              //   text: 'Tamil',
-              // ),
+              Tab(
+                text: 'Tamil',
+              ),
+              Tab(
+                text: 'Sinhala',
+              ),
             ],
           ),
         ),
         body: TabBarView(
-          children: [ChatScreen()],
+          children: [ChatScreen(), ChatScreen_Tamil()],
         ),
       ),
     );
