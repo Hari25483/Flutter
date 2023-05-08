@@ -37,8 +37,8 @@ class TabScreen extends StatelessWidget {
                   //Implement logout functionality
                 }),
           ],
-          title: Text('⚡Emotion Buddy'),
-          backgroundColor: Colors.lightBlueAccent,
+          title: Text('Evote Bot'),
+          backgroundColor: Colors.black54,
           bottom: const TabBar(
             tabs: [
               Tab(
