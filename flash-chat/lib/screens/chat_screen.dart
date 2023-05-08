@@ -48,7 +48,7 @@ void get_suggestion(
     String text, String category, String uid_val, int count_val) async {
   await getLink();
   url = '$link' +
-      'next_word?word=$text&uid=$uid_val&category=Plant&count=$count_val';
+      '/vote_question?word=$text&uid=$uid_val&category=Plant&count=$count_val';
   print(url);
   Response response = await get(Uri.parse(url));
   // '$url_base_path/next_word?word=$text,&uid=$uid_val&category=$category'
