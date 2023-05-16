@@ -45,10 +45,10 @@ class TabScreen extends StatelessWidget {
                 text: 'English',
               ),
               Tab(
-                text: 'Tamil',
+                text: 'Sinhala',
               ),
               Tab(
-                text: 'Sinhala',
+                text: 'Tamil',
               ),
             ],
           ),
